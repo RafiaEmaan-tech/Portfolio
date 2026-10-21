@@ -1,4 +1,4 @@
-import { BarChart3, Briefcase, FileText, HandCoins, Landmark, UserSearch } from "lucide-react";
+  import { BarChart3, Briefcase, FileText, HandCoins, Landmark, UserSearch } from "lucide-react";
 import { FadeUp } from "../motion";
 import { SectionHeading, accent } from "../ui";
 
