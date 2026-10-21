@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0c0a0e;
+  --bg-2: #141017;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-2: rgba(255, 255, 255, 0.14);
+  --ink: #f5eee9;
+  --muted: #a99ea3;
+  --dim: #6f6569;
+  --rose: #ee8fa3;
+  --rose-2: #f6b8c5;
+  --rose-deep: #c4566f;
+  --gold: #e0b873;
+  --mint: #8fe3c4;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-rose: var(--rose);
+  --color-rose-2: var(--rose-2);
+  --color-rose-deep: var(--rose-deep);
+  --color-gold: var(--gold);
+  --color-mint: var(--mint);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-jetbrains);
+  --font-display: var(--font-playfair);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--rose);
+  color: #1a0f13;
+}
+
+/* Blueprint grid used behind the hero and section heads */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--rose-2) 0%, var(--rose) 40%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: rgba(20, 16, 23, 0.82);
+  border: 1px solid var(--line-2);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+
+.card {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--line);
+  transition: border-color 0.3s, transform 0.3s, background 0.3s;
+}
+.card:hover {
+  border-color: rgba(238, 143, 163, 0.35);
+}
+
+/* Cursor-following glow; --mx/--my are set by <PointerEffects /> */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(238, 143, 163, 0.16), transparent 60%);
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+.eyebrow {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(245, 238, 233, 0.22);
+}
+.text-outline-rose {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--rose);
+}
+
+
+.noise::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 30s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-spin-slow { animation: none; }
+}
